@@ -20,7 +20,7 @@ using namespace std;
 int main(int argc, char** argv) {
     cout << "Hello world!" << endl;
     
-    auto lib = new helloworld_lib();
-    lib->sayHello();
+    helloworld_lib lib;
+    lib.sayHello();
     return 0;
 }

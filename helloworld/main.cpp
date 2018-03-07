@@ -13,9 +13,14 @@
 
 #include <iostream>
 
+#include "helloworld_lib.h"
+
 using namespace std;
 
 int main(int argc, char** argv) {
     cout << "Hello world!" << endl;
+    
+    auto lib = new helloworld_lib();
+    lib->sayHello();
     return 0;
 }

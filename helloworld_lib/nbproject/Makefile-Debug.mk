@@ -35,7 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/main.o
+	${OBJECTDIR}/helloworld_lib.o
 
 
 # C Compiler Flags
@@ -52,38 +52,30 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-L../helloworld_lib/dist/Debug -L../helloworld_lib/dist/Debug/GNU-MacOSX -lhelloworld_lib
+LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld
-	${CP} ../helloworld_lib/dist/Debug/GNU-MacOSX/libhelloworld_lib.dylib ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	-install_name_tool -change libhelloworld_lib.dylib @executable_path/libhelloworld_lib.dylib ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libhelloworld_lib.${CND_DLIB_EXT}
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld: ../helloworld_lib/dist/Debug/GNU-MacOSX/libhelloworld_lib.dylib
-
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libhelloworld_lib.${CND_DLIB_EXT}: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libhelloworld_lib.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -dynamiclib -install_name libhelloworld_lib.${CND_DLIB_EXT} -fPIC
 
-${OBJECTDIR}/main.o: main.cpp
+${OBJECTDIR}/helloworld_lib.o: helloworld_lib.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -I../helloworld_lib -std=c++11 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -fPIC  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/helloworld_lib.o helloworld_lib.cpp
 
 # Subprojects
 .build-subprojects:
-	cd ../helloworld_lib && ${MAKE}  -f Makefile CONF=Debug
 
 # Clean Targets
 .clean-conf: ${CLEAN_SUBPROJECTS}
 	${RM} -r ${CND_BUILDDIR}/${CND_CONF}
-	${RM} -r ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libhelloworld_lib.dylib
-	${RM} ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld
 
 # Subprojects
 .clean-subprojects:
-	cd ../helloworld_lib && ${MAKE}  -f Makefile CONF=Debug clean
 
 # Enable dependency checking
 .dep.inc: .depcheck-impl

@@ -13,9 +13,9 @@ CND_BUILDDIR=build
 CND_DLIB_EXT=dylib
 NBTMPDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}/tmp-packaging
 TMPDIRNAME=tmp-packaging
-OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/helloworld
-OUTPUT_BASENAME=helloworld
-PACKAGE_TOP_DIR=helloworld/
+OUTPUT_PATH=${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libhelloworld_lib.${CND_DLIB_EXT}
+OUTPUT_BASENAME=libhelloworld_lib.${CND_DLIB_EXT}
+PACKAGE_TOP_DIR=libhelloworldlib.dylib/
 
 # Functions
 function checkReturnCode
@@ -60,19 +60,15 @@ mkdir -p ${NBTMPDIR}
 
 # Copy files and create directories and links
 cd "${TOP}"
-makeDirectory "${NBTMPDIR}/helloworld/bin"
-copyFileToTmpDir "${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libhelloworld_lib.dylib" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/libhelloworld_lib.dylib" 0755
-
-cd "${TOP}"
-makeDirectory "${NBTMPDIR}/helloworld/bin"
-copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}bin/${OUTPUT_BASENAME}" 0755
+makeDirectory "${NBTMPDIR}/libhelloworldlib.dylib/lib"
+copyFileToTmpDir "${OUTPUT_PATH}" "${NBTMPDIR}/${PACKAGE_TOP_DIR}lib/${OUTPUT_BASENAME}" 0644
 
 
 # Generate tar file
 cd "${TOP}"
-rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/helloworld.tar
+rm -f ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/libhelloworldlib.dylib.tar
 cd ${NBTMPDIR}
-tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/helloworld.tar *
+tar -vcf ../../../../${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/package/libhelloworldlib.dylib.tar *
 checkReturnCode
 
 # Cleanup
